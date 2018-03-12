@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item android:title="首页" />
+        <item android:title="图书管理">
+            <menu>
+                <item android:title="信息录入" />
+                <item android:title="借阅管理" />
+            </menu>
+        </item>
+        <item android:title="用户管理" />
+        <item android:title="数据维护" />
+        <item android:title="关于" />
+    </group>
+</menu>

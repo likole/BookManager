@@ -1,7 +1,9 @@
-package cn.likole.bookmanager;
+package cn.likole.bookmanager.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import cn.likole.bookmanager.R;
 
 public class MainActivity extends AppCompatActivity {
 
