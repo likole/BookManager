@@ -3,15 +3,37 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item android:title="首页" />
+        <item
+            android:id="@+id/navigation_item_home"
+            android:icon="@drawable/iconfont_home"
+            android:title="首页" />
+        <item
+            android:id="@+id/navigation_item_user"
+            android:icon="@drawable/iconfont_home"
+            android:title="用户管理" />
         <item android:title="图书管理">
             <menu>
-                <item android:title="信息录入" />
-                <item android:title="借阅管理" />
+                <item
+                    android:id="@+id/navigation_item_addbook"
+                    android:icon="@drawable/iconfont_home"
+                    android:title="信息录入" />
+                <item
+                    android:id="@+id/navigation_item_borrow"
+                    android:icon="@drawable/iconfont_home"
+                    android:title="借阅管理" />
             </menu>
         </item>
-        <item android:title="用户管理" />
-        <item android:title="数据维护" />
-        <item android:title="关于" />
+        <item android:title="其他">
+            <menu>
+                <item
+                    android:id="@+id/navigation_item_data"
+                    android:icon="@drawable/iconfont_home"
+                    android:title="数据维护" />
+                <item
+                    android:id="@+id/navigation_item_about"
+                    android:icon="@drawable/iconfont_home"
+                    android:title="关于" />
+            </menu>
+        </item>
     </group>
 </menu>

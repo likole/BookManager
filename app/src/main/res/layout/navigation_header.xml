@@ -26,9 +26,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:text="_SOLID"
-        android:textColor="#ffffff"
+        android:text="管理员"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="#ffffff"
         android:textSize="18sp" />
 
 </LinearLayout>
