@@ -1,5 +1,8 @@
 package cn.likole.bookmanager.activity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -14,6 +17,7 @@ import android.view.MenuItem;
 
 import cn.likole.bookmanager.R;
 import cn.likole.bookmanager.fragment.MainFragment;
+import cn.likole.bookmanager.fragment.UserFragment;
 import cn.likole.bookmanager.util.SnackBarUtils;
 import cn.likole.bookmanager.util.ViewUtils;
 
@@ -100,7 +104,7 @@ public class MainActivity extends BaseActivity {
                 if (null != mPreMenuItem) {
                     mPreMenuItem.setChecked(false);
                 }
-//                switch (item.getItemId()) {
+                switch (item.getItemId()) {
 //                    case R.id.navigation_item_home:
 //                        mToolbar.setTitle("首页");
 //                        switchFragment(MainFragment.class);
@@ -129,9 +133,22 @@ public class MainActivity extends BaseActivity {
 //                        mToolbar.setTitle("关于");
 //                        switchFragment(AboutFragment.class);
 //                        break;
-//                    default:
-//                        break;
-//                }
+                    case R.id.navigation_item_user:
+                        mToolbar.setTitle("用户管理");
+                        switchFragment(UserFragment.class);
+                        break;
+                    case R.id.navigation_item_logout:
+                        SharedPreferences sp = MainActivity.this.getSharedPreferences("login", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sp.edit();
+                        editor.remove("uid");
+                        editor.remove("username");
+                        editor.commit();
+                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                        finish();
+                        break;
+                    default:
+                        break;
+                }
                 item.setChecked(true);
                 mDrawerLayout.closeDrawer(Gravity.LEFT);
                 mPreMenuItem = item;
