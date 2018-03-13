@@ -17,11 +17,7 @@
     <string name="pre_status_bar" translatable="false">pre_status_bar</string>
 
 
-    <string name="about_msg">此应用是基于MD的支持库实现的，是针对此支持库的一个小Demo，其中的api来源于豆瓣(首页的电影部分由于时间原因还未完成)，开发测试机为魅族，Android版本5.1。
-    \n\n 作者:_SOLID
-    \n\n 简书主页 http://www.jianshu.com/users/6725c8e8194f
-    \n\n GitHub主页 https://github.com/burgessjp
-    \n\n 新浪微博ID:_SOLID(之后的新文章会第一时间分享到新浪微博)</string>
+    <string name="about_msg"></string>
     <!-- Strings related to Settings -->
 
     <!-- Example General settings -->
@@ -83,8 +79,8 @@
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>

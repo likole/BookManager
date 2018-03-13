@@ -1,7 +1,9 @@
 package cn.likole.bookmanager.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -41,12 +43,12 @@ public class SplashActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-//        if (UserManage.getInstance().hasUserInfo(this))//自动登录判断，SharePrefences中有数据，则跳转到主页，没数据则跳转到登录页
-//        {
-//            mHandler.sendEmptyMessageDelayed(GO_HOME, 2000);
-//        } else {
-//            mHandler.sendEmptyMessageAtTime(GO_LOGIN, 2000);
-//        }
-        mHandler.sendEmptyMessageDelayed(GO_LOGIN, 2000);
+        SharedPreferences sp = SplashActivity.this.getSharedPreferences("login", Context.MODE_PRIVATE);
+        if (sp.getInt("uid", 0) == 0) {
+            mHandler.sendEmptyMessage(GO_LOGIN);
+        } else {
+            mHandler.sendEmptyMessage(GO_HOME);
+        }
     }
+
 }
