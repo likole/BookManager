@@ -1,7 +1,6 @@
 package cn.likole.bookmanager.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 
 import java.util.List;
 

@@ -16,7 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import cn.likole.bookmanager.R;
-import cn.likole.bookmanager.fragment.MainFragment;
+import cn.likole.bookmanager.fragment.BookFragment;
 import cn.likole.bookmanager.fragment.UserFragment;
 import cn.likole.bookmanager.util.SnackBarUtils;
 import cn.likole.bookmanager.util.ViewUtils;
@@ -88,7 +88,7 @@ public class MainActivity extends BaseActivity {
     //init the default checked fragment
     private void initDefaultFragment() {
         Log.i(TAG, "initDefaultFragment");
-        mCurrentFragment = ViewUtils.createFragment(MainFragment.class);
+        mCurrentFragment = ViewUtils.createFragment(BookFragment.class);
 
         mFragmentManager.beginTransaction().add(R.id.frame_content, mCurrentFragment).commit();
         mPreMenuItem = mNavigationView.getMenu().getItem(0);
@@ -105,10 +105,10 @@ public class MainActivity extends BaseActivity {
                     mPreMenuItem.setChecked(false);
                 }
                 switch (item.getItemId()) {
-//                    case R.id.navigation_item_home:
-//                        mToolbar.setTitle("首页");
-//                        switchFragment(MainFragment.class);
-//                        break;
+                    case R.id.navigation_item_home:
+                        mToolbar.setTitle("首页");
+                        switchFragment(BookFragment.class);
+                        break;
 //                    case R.id.navigation_item_ganhuo:
 //                        mToolbar.setTitle(getString(R.string.ganhuo));
 //                        switchFragment(GanHuoFragment.class);

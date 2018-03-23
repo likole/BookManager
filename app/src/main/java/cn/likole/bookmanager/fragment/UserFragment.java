@@ -1,6 +1,5 @@
 package cn.likole.bookmanager.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -8,17 +7,19 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.daimajia.swipe.SwipeLayout;
-import com.daimajia.swipe.adapters.ArraySwipeAdapter;
+
+import java.util.ArrayList;
 
 import cn.likole.bookmanager.R;
+import cn.likole.bookmanager.adapter.UserAdapter;
+import cn.likole.bookmanager.bean.UserBean;
+import cn.likole.bookmanager.util.SnackBarUtils;
 
 public class UserFragment extends BaseFragment {
 
     private ListView mListView;
-    private Context mContext = getActivity();
 
     @Override
     protected void setUpView() {
@@ -30,17 +31,14 @@ public class UserFragment extends BaseFragment {
         /**
          * The following comment is the sample usage of ArraySwipeAdapter.
          */
-        String[] adapterData = new String[]{"Activity", "Service", "Content Provider", "Intent", "BroadcastReceiver", "ADT", "Sqlite3", "HttpClient",
-                "DDMS", "Android Studio", "Fragment", "Loader", "Activity", "Service", "Content Provider", "Intent",
-                "BroadcastReceiver", "ADT", "Sqlite3", "HttpClient", "Activity", "Service", "Content Provider", "Intent",
-                "BroadcastReceiver", "ADT", "Sqlite3", "HttpClient"};
-        mListView.setAdapter(new ArraySwipeAdapter<String>(getActivity(), R.layout.fragment_user_list_item, R.id.position, adapterData) {
+        ArrayList<UserBean> list = new ArrayList<>();
+        UserBean userbean = new UserBean();
+        userbean.setUserId(1000);
+        userbean.setUserUsername("测试用户");
+        userbean.setUserName("正在加载中，请稍候");
+        list.add(userbean);
 
-            @Override
-            public int getSwipeLayoutResourceId(int position) {
-                return R.id.user_swipe;
-            }
-        });
+        mListView.setAdapter(new UserAdapter(getActivity(), list));
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -58,7 +56,8 @@ public class UserFragment extends BaseFragment {
         mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(), "OnItemLongClickListener", Toast.LENGTH_SHORT).show();
+                SnackBarUtils.makeShort(mListView, "滑动删除用户，暂不支持修改，可先删除再添加").success();
+//                Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
                 return true;
             }
         });

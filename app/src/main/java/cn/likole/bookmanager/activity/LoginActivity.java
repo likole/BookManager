@@ -30,12 +30,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.likole.bookmanager.R;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import static android.Manifest.permission.READ_CONTACTS;
+import static cn.likole.bookmanager.Constant.basic_url;
 
 /**
  * A login screen that offers login via email/password.
@@ -171,10 +180,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mEmailView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
             cancel = true;
-        } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
-            cancel = true;
+//        } else if (!isEmailValid(email)) {
+//            mEmailView.setError(getString(R.string.error_invalid_email));
+//            focusView = mEmailView;
+//            cancel = true;
         }
 
         if (cancel) {
@@ -304,22 +313,38 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
 
+            OkHttpClient client = new OkHttpClient();
+            FormBody.Builder formBody = new FormBody.Builder();
+            formBody.add("username", mEmail);
+            formBody.add("password", mPassword);
+            Request request = new Request.Builder()
+                    .url(basic_url + "user/login")
+                    .post(formBody.build())
+                    .build();
+            Response response = null;
             try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
+                response = client.newCall(request).execute();
+                if (!response.isSuccessful()) return false;
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
-            if ("cf@".equals(mEmail) && "05240416".equals(mPassword)) {
-                SharedPreferences sp = LoginActivity.this.getSharedPreferences("login", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sp.edit();
-                editor.putInt("uid", 1);
-                editor.putString("username", mEmail);
-                editor.commit();
-                return true;
+
+            try {
+                String body = response.body().string();
+                JsonObject jsonObject = (JsonObject) new JsonParser().parse(body);
+                if (jsonObject.get("success").getAsBoolean() == true) {
+                    SharedPreferences sp = LoginActivity.this.getSharedPreferences("login", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putInt("uid", jsonObject.get("userId").getAsInt());
+                    editor.putString("username", mEmail);
+                    editor.commit();
+                    return true;
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
             return false;
