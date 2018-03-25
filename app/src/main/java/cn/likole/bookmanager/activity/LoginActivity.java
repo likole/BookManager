@@ -326,12 +326,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             try {
                 response = client.newCall(request).execute();
                 if (!response.isSuccessful()) return false;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-            try {
                 String body = response.body().string();
                 JsonObject jsonObject = (JsonObject) new JsonParser().parse(body);
                 if (jsonObject.get("success").getAsBoolean() == true) {

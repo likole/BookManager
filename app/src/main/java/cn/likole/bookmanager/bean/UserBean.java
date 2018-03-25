@@ -6,9 +6,19 @@ package cn.likole.bookmanager.bean;
 
 public class UserBean {
     private int userId;
-    private String userUsername;
+    private String userUserName;
     private String userPassword;
     private String userName;
+
+    @Override
+    public String toString() {
+        return "UserBean{" +
+                "userId=" + userId +
+                ", userUsername='" + userUserName + '\'' +
+                ", userPassword='" + userPassword + '\'' +
+                ", userName='" + userName + '\'' +
+                '}';
+    }
 
     public int getUserId() {
 
@@ -20,11 +30,11 @@ public class UserBean {
     }
 
     public String getUserUsername() {
-        return userUsername;
+        return userUserName;
     }
 
     public void setUserUsername(String userUsername) {
-        this.userUsername = userUsername;
+        this.userUserName = userUsername;
     }
 
     public String getUserPassword() {

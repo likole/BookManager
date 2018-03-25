@@ -12,10 +12,19 @@ import com.daimajia.swipe.SimpleSwipeListener;
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.BaseSwipeAdapter;
 
+import java.io.IOException;
 import java.util.List;
 
 import cn.likole.bookmanager.R;
 import cn.likole.bookmanager.bean.UserBean;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+import static cn.likole.bookmanager.Constant.basic_url;
 
 /**
  * Created by likole on 3/23/18.
@@ -34,6 +43,11 @@ public class UserAdapter extends BaseSwipeAdapter {
         this.mDatas = mDatas;
     }
 
+    public void update(List<UserBean> mDatas) {
+        this.mDatas = mDatas;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return mDatas.size();
@@ -50,13 +64,15 @@ public class UserAdapter extends BaseSwipeAdapter {
     }
 
     @Override
-    public void fillValues(int position, View convertView) {
+    public void fillValues(final int position, View convertView) {
         Log.e("fillValues", "position = " + position);
         TextView tv = (TextView) convertView.findViewById(R.id.user_username);
         //tv.setText((position + 1) + ".");
-        tv.setText(mDatas.get(position).getUserUsername() + "(" + mDatas.get(position).getUserId() + ")");
+        tv.setText("账号：" + mDatas.get(position).getUserUsername() + "(用户编号：" + mDatas.get(position).getUserId() + ")");
         TextView tv2 = (TextView) convertView.findViewById(R.id.user_name);
-        tv.setText(mDatas.get(position).getUserName());
+        tv2.setText("用户名：" + mDatas.get(position).getUserName());
+        TextView tv3 = (TextView) convertView.findViewById(R.id.user_password);
+        tv3.setText("密码：" + mDatas.get(position).getUserPassword());
 
         final SwipeLayout sl = (SwipeLayout) convertView.findViewById(getSwipeLayoutResourceId(position));
         final TextView delete = (TextView) convertView.findViewById(R.id.delete);
@@ -70,6 +86,28 @@ public class UserAdapter extends BaseSwipeAdapter {
 
                 Log.e("onClick", "........pos ...." + pos + " obj = " + obj);
                 mDatas.remove(obj);
+
+                //发送请求
+                OkHttpClient client = new OkHttpClient();
+                FormBody.Builder formBody = new FormBody.Builder();
+                formBody.add("userId", mDatas.get(position).getUserId() + "");
+                Request request = new Request.Builder()
+                        .url(basic_url + "user/delete")
+                        .post(formBody.build())
+                        .build();
+                client.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+
+                    }
+                });
+
+                //通知更改
                 notifyDataSetChanged();
                 sl.close();
             }

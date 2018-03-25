@@ -1,6 +1,8 @@
 package cn.likole.bookmanager.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -9,17 +11,42 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.daimajia.swipe.SwipeLayout;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import cn.likole.bookmanager.R;
 import cn.likole.bookmanager.adapter.UserAdapter;
 import cn.likole.bookmanager.bean.UserBean;
 import cn.likole.bookmanager.util.SnackBarUtils;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+import static cn.likole.bookmanager.Constant.basic_url;
 
 public class UserFragment extends BaseFragment {
 
     private ListView mListView;
+    ArrayList<UserBean> list;
+    UserAdapter userAdapter;
+    Handler handler = new Handler() {
+        public void handleMessage(android.os.Message msg) {
+            switch (msg.what) {
+                case 0:
+                    userAdapter.update(list);
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void setUpView() {
@@ -31,14 +58,17 @@ public class UserFragment extends BaseFragment {
         /**
          * The following comment is the sample usage of ArraySwipeAdapter.
          */
-        ArrayList<UserBean> list = new ArrayList<>();
-        UserBean userbean = new UserBean();
-        userbean.setUserId(1000);
-        userbean.setUserUsername("测试用户");
-        userbean.setUserName("正在加载中，请稍候");
-        list.add(userbean);
+//        UserBean userbean = new UserBean();
+//        userbean.setUserId(1000);
+//        userbean.setUserUsername("测试用户");
+//        userbean.setUserName("正在加载中，请稍候");
+//        list.add(userbean);
 
-        mListView.setAdapter(new UserAdapter(getActivity(), list));
+        list = new ArrayList<>();
+
+        userAdapter = new UserAdapter(getActivity(), list);
+        mListView.setAdapter(userAdapter);
+        update();
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -96,4 +126,35 @@ public class UserFragment extends BaseFragment {
     protected int setLayoutResourceID() {
         return R.layout.fragment_user_list;
     }
+
+    public void update() {
+        OkHttpClient client = new OkHttpClient();
+        FormBody.Builder formBody = new FormBody.Builder();
+        Request request = new Request.Builder()
+                .url(basic_url + "user/userList")
+                .post(formBody.build())
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                SnackBarUtils.makeLong(mListView, "网络错误，请检查网络后重试").danger();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                try {
+                    list = new Gson().fromJson(response.body().string(), new TypeToken<List<UserBean>>() {
+                    }.getType());
+//                    Log.e("info",list.toString());
+                    Message msg = new Message();
+                    msg.what = 0;
+                    handler.sendMessage(msg);
+                } catch (Exception e) {
+                    //应该不会发生
+                }
+
+            }
+        });
+    }
+
 }
