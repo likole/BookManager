@@ -1,7 +1,5 @@
 package cn.likole.bookmanager.bean;
 
-import java.util.List;
-
 /**
  * Created by _SOLID
  * Date:2016/3/30
@@ -9,230 +7,103 @@ import java.util.List;
  * <p/>
  * 书籍实体类
  */
+
+//[{"bookId":1000,"bookIsbn":"BX8888","bookNumber":99,"bookBorrow":1,"bookImage":"SADLHJKALSHFJKLASHNFLASKFNAKSL","bookTitle":"张泰龙大帅比","bookIntro":"张泰龙是个很帅很帅的bb","bookAuthor":"张泰龙","authorIntro":null}
 public class BookBean {
+    private int bookId;
+    private String bookIsbn;
+    private int bookNumber;
+    private int bookBorrow;
+    private String bookImage;
+    private String bookTitle;
+    private String bookIntro;
+    private String bookAuthor;
+    private String authorIntro;
 
-    private Rating rating;
-    private String subtitle;
-    private List<String> author;
-    private String pubdate;
-    private String origin_title;
-    private String image;
-    private String catalog;
-    private String pages;
-    private Images images;
-    private String publisher;
-    private String title;
-    private String url;
-    private String author_intro;
-    private String summary;
-    private String price;
-    private String isbn10;
-    private String isbn13;
-
-    public BookBean.Rating getRating() {
-        return rating;
+    @Override
+    public String toString() {
+        return "BookBean{" +
+                "bookId=" + bookId +
+                ", bookIsbn='" + bookIsbn + '\'' +
+                ", bookNumber=" + bookNumber +
+                ", bookBorrow=" + bookBorrow +
+                ", bookImage='" + bookImage + '\'' +
+                ", bookTitle='" + bookTitle + '\'' +
+                ", bookIntro='" + bookIntro + '\'' +
+                ", bookAuthor='" + bookAuthor + '\'' +
+                ", authorIntro='" + authorIntro + '\'' +
+                '}';
     }
 
-    public void setRating(BookBean.Rating rating) {
-        this.rating = rating;
+    public int getBookId() {
+        return bookId;
     }
 
-    public String getSubtitle() {
-        return subtitle;
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
     }
 
-    public void setSubtitle(String subtitle) {
-        this.subtitle = subtitle;
+    public String getBookIsbn() {
+        return bookIsbn;
     }
 
-    public List<String> getAuthor() {
-        return author;
+    public void setBookIsbn(String bookIsbn) {
+        this.bookIsbn = bookIsbn;
     }
 
-    public void setAuthor(List<String> author) {
-        this.author = author;
+    public int getBookNumber() {
+        return bookNumber;
     }
 
-    public String getPubdate() {
-        return pubdate;
+    public void setBookNumber(int bookNumber) {
+        this.bookNumber = bookNumber;
     }
 
-    public void setPubdate(String pubdate) {
-        this.pubdate = pubdate;
+    public int getBookBorrow() {
+        return bookBorrow;
     }
 
-    public String getOrigin_title() {
-        return origin_title;
+    public void setBookBorrow(int bookBorrow) {
+        this.bookBorrow = bookBorrow;
     }
 
-    public void setOrigin_title(String origin_title) {
-        this.origin_title = origin_title;
+    public String getBookImage() {
+        return bookImage;
     }
 
-    public String getImage() {
-        return image;
+    public void setBookImage(String bookImage) {
+        this.bookImage = bookImage;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public String getBookTitle() {
+        return bookTitle;
     }
 
-    public String getCatalog() {
-        return catalog;
+    public void setBookTitle(String bookTitle) {
+        this.bookTitle = bookTitle;
     }
 
-    public void setCatalog(String catalog) {
-        this.catalog = catalog;
+    public String getBookIntro() {
+        return bookIntro;
     }
 
-    public String getPages() {
-        return pages;
+    public void setBookIntro(String bookIntro) {
+        this.bookIntro = bookIntro;
     }
 
-    public void setPages(String pages) {
-        this.pages = pages;
+    public String getBookAuthor() {
+        return bookAuthor;
     }
 
-    public BookBean.Images getImages() {
-        return images;
+    public void setBookAuthor(String bookAuthor) {
+        this.bookAuthor = bookAuthor;
     }
 
-    public void setImages(BookBean.Images images) {
-        this.images = images;
+    public String getAuthorIntro() {
+        return authorIntro;
     }
 
-    public String getPublisher() {
-        return publisher;
+    public void setAuthorIntro(String authorIntro) {
+        this.authorIntro = authorIntro;
     }
-
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getAuthor_intro() {
-        return author_intro;
-    }
-
-    public void setAuthor_intro(String author_intro) {
-        this.author_intro = author_intro;
-    }
-
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public String getIsbn10() {
-        return isbn10;
-    }
-
-    public void setIsbn10(String isbn10) {
-        this.isbn10 = isbn10;
-    }
-
-    public String getIsbn13() {
-        return isbn13;
-    }
-
-    public void setIsbn13(String isbn13) {
-        this.isbn13 = isbn13;
-    }
-
-
-    public class Rating {
-        private float max;
-        private int numRaters;
-        private float average;
-        private float min;
-
-        public float getMax() {
-            return max;
-        }
-
-        public void setMax(float max) {
-            this.max = max;
-        }
-
-        public int getNumRaters() {
-            return numRaters;
-        }
-
-        public void setNumRaters(int numRaters) {
-            this.numRaters = numRaters;
-        }
-
-        public float getAverage() {
-            return average;
-        }
-
-        public void setAverage(float average) {
-            this.average = average;
-        }
-
-        public float getMin() {
-            return min;
-        }
-
-        public void setMin(float min) {
-            this.min = min;
-        }
-    }
-
-    public class Images {
-        private String small;
-        private String large;
-        private String medium;
-
-        public String getSmall() {
-            return small;
-        }
-
-        public void setSmall(String small) {
-            this.small = small;
-        }
-
-        public String getLarge() {
-            return large;
-        }
-
-        public void setLarge(String large) {
-            this.large = large;
-        }
-
-        public String getMedium() {
-            return medium;
-        }
-
-        public void setMedium(String medium) {
-            this.medium = medium;
-        }
-    }
-
 }

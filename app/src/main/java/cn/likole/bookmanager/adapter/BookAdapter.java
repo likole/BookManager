@@ -1,10 +1,12 @@
 package cn.likole.bookmanager.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 
 import java.util.List;
 
 import cn.likole.bookmanager.R;
+import cn.likole.bookmanager.activity.BookDetailActivity;
 import cn.likole.bookmanager.bean.BookBean;
 
 /**
@@ -25,19 +27,18 @@ public class BookAdapter extends RVBaseAdapter<BookBean> {
 
     @Override
     protected void onItemClick(int position) {
-//        Intent intent = new Intent(mContext, BookDetailActivity.class);
-//        intent.putExtra("url", mBeans.get(position - 1).getUrl());
-//        mContext.startActivity(intent);
+        Intent intent = new Intent(mContext, BookDetailActivity.class);
+        intent.putExtra("bookId", mBeans.get(position - 1).getBookId());
+        mContext.startActivity(intent);
     }
 
     @Override
     protected void onBindDataToView(MyCommonViewHolder holder, BookBean bean, int position) {
-//        holder.setText(R.id.tv_title, bean.getTitle());
-//        holder.setText(R.id.tv_price, "￥" + bean.getPrice());
-//        holder.setText(R.id.tv_author, "作者:" + bean.getAuthor() + "");
-//        holder.setText(R.id.tv_date, "出版日期:" + bean.getPubdate());
-//        holder.setText(R.id.tv_publisher, "出版社:" + bean.getPublisher());
-//        holder.setText(R.id.tv_num_rating, bean.getRating().getNumRaters() + "人评分");
+        holder.setText(R.id.tv_title, bean.getBookTitle());
+        holder.setText(R.id.tv_num, "数量：" + (bean.getBookNumber() - bean.getBookBorrow()) + "/" + bean.getBookNumber());
+        holder.setText(R.id.tv_author, "作者:" + bean.getBookAuthor() + "");
+        holder.setText(R.id.tv_isbn, "ISBN:" + bean.getBookIsbn());
+        holder.setText(R.id.tv_bookid, "图书编号:" + bean.getBookId());
 //        holder.setImageFromInternet(R.id.iv_image, bean.getImage());
     }
 }

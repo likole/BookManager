@@ -3,12 +3,12 @@ package cn.likole.bookmanager.fragment;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
@@ -22,8 +22,11 @@ import java.util.Random;
 import cn.likole.bookmanager.R;
 import cn.likole.bookmanager.adapter.BookAdapter;
 import cn.likole.bookmanager.bean.BookBean;
+import cn.likole.bookmanager.util.SnackBarUtils;
 import ren.solid.library.http.HttpClientManager;
 import ren.solid.library.http.callback.adapter.JsonHttpCallBack;
+
+import static cn.likole.bookmanager.Constant.basic_url;
 
 public class BookFragment extends BaseFragment implements View.OnClickListener {
 
@@ -42,6 +45,18 @@ public class BookFragment extends BaseFragment implements View.OnClickListener {
     private String mCurrentKeyWord;
     private int mPageSize = 20;
     private int mCurrentPageIndex = 1;
+
+    Handler handler = new Handler() {
+        public void handleMessage(android.os.Message msg) {
+            switch (msg.what) {
+                case 5:
+                    loadComplete();
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
 
     @Override
@@ -86,19 +101,14 @@ public class BookFragment extends BaseFragment implements View.OnClickListener {
     }
 
     private void getData() {
-        String reqUrl = "https://api.douban.com/v2/book/search" + "?q=" + mCurrentKeyWord + "&start=" + (mCurrentPageIndex - 1) * mPageSize +
-                "&count=" + mPageSize;
+//        String reqUrl = "https://api.douban.com/v2/book/search" + "?q=" + mCurrentKeyWord + "&start=" + (mCurrentPageIndex - 1) * mPageSize +
+//                "&count=" + mPageSize;
 
-        HttpClientManager.getData(reqUrl, new JsonHttpCallBack<List<BookBean>>() {
+        HttpClientManager.getData(basic_url + "book/entireList", new JsonHttpCallBack<List<BookBean>>() {
             @Override
             public Type getType() {
                 return new TypeToken<List<BookBean>>() {
                 }.getType();
-            }
-
-            @Override
-            public String getDataName() {
-                return "books";
             }
 
             @Override
@@ -108,12 +118,18 @@ public class BookFragment extends BaseFragment implements View.OnClickListener {
             }
 
             @Override
+            public DataType getDataType() {
+                return DataType.OBJECT;
+            }
+
+            @Override
             public void onError(Exception e) {
                 Log.e(TAG, "onError:" + e);
-                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT);
+                SnackBarUtils.makeLong(mRecyclerView, "网络错误").danger();
                 loadComplete();
             }
         });
+
     }
 
     private void loadComplete() {
