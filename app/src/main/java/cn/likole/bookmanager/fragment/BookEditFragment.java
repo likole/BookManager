@@ -82,10 +82,10 @@ public class BookEditFragment extends BaseFragment {
 
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
-                        getActivity().finish();
                         Intent intent = new Intent(getActivity(), BookDetailActivity.class);
                         intent.putExtra("bookId", getArguments().getInt("bookId"));
                         getActivity().startActivity(intent);
+                        getActivity().finish();
                     }
                 });
             }

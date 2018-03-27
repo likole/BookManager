@@ -1,62 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-    <!--int bookId<br />String bookIsbn<br />int bookNumber<br /> int bookBorrow<br />String bookImage<br /> String bookTitle<br />String bookIntro<br />String bookAuthor<br />String authorIntro |-->
-    <ScrollView
+    android:scrollbars="vertical">
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <EditText
+            android:id="@+id/et_book_isbn"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:hint="ISBN" />
 
-            <EditText
-                android:id="@+id/et_book_isbn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="ISBN" />
+        <EditText
+            android:id="@+id/et_book_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="总数"
+            android:inputType="number" />
 
-            <EditText
-                android:id="@+id/et_book_number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="总数"
-                android:inputType="number" />
+        <EditText
+            android:id="@+id/et_book_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="标题" />
 
-            <EditText
-                android:id="@+id/et_book_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="标题" />
+        <EditText
+            android:id="@+id/et_book_intro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="简介" />
 
-            <EditText
-                android:id="@+id/et_book_intro"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="简介" />
+        <EditText
+            android:id="@+id/et_book_auther"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="作者" />
 
-            <EditText
-                android:id="@+id/et_book_auther"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="作者" />
+        <EditText
+            android:id="@+id/et_book_autherInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="作者简介" />
 
-            <EditText
-                android:id="@+id/et_book_autherInfo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="作者简介" />
-
-            <Button
-                android:id="@+id/btn_edit_book"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="修改" />
-        </LinearLayout>
-    </ScrollView>
-
-</LinearLayout>
+        <Button
+            android:id="@+id/btn_edit_book"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="确定" />
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

@@ -1,5 +1,6 @@
 package cn.likole.bookmanager.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -8,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.daimajia.swipe.SwipeLayout;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.likole.bookmanager.R;
+import cn.likole.bookmanager.activity.UserAddActivity;
 import cn.likole.bookmanager.adapter.UserAdapter;
 import cn.likole.bookmanager.bean.UserBean;
 import cn.likole.bookmanager.util.SnackBarUtils;
@@ -34,6 +37,7 @@ import static cn.likole.bookmanager.Constant.basic_url;
 public class UserFragment extends BaseFragment {
 
     private ListView mListView;
+    private Button btn;
     ArrayList<UserBean> list;
     UserAdapter userAdapter;
     Handler handler = new Handler() {
@@ -51,6 +55,13 @@ public class UserFragment extends BaseFragment {
     @Override
     protected void setUpView() {
         mListView = $(R.id.user_list);
+        btn = $(R.id.btn_user_addActivity);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), UserAddActivity.class));
+            }
+        });
     }
 
     @Override

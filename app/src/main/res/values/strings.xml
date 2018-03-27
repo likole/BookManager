@@ -17,7 +17,10 @@
     <string name="pre_status_bar" translatable="false">pre_status_bar</string>
 
 
-    <string name="about_msg"></string>
+    <string name="about_msg">1．系统登录管理；\n
+2．公司图书资料信息录入、借阅管理、检索查找、修改和删除；\n
+3．公司图书资料信息的图像拍摄、保存和阅览；\n
+4. 公司图书资料信息的数据维护和导入导出等功能。</string>
     <!-- Strings related to Settings -->
 
     <!-- Example General settings -->

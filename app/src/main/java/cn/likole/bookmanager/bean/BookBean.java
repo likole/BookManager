@@ -18,7 +18,7 @@ public class BookBean {
     private String bookTitle;
     private String bookIntro;
     private String bookAuthor;
-    private String authorIntro;
+    private String bookAuthorIntro;
 
     @Override
     public String toString() {
@@ -31,7 +31,7 @@ public class BookBean {
                 ", bookTitle='" + bookTitle + '\'' +
                 ", bookIntro='" + bookIntro + '\'' +
                 ", bookAuthor='" + bookAuthor + '\'' +
-                ", authorIntro='" + authorIntro + '\'' +
+                ", authorIntro='" + bookAuthorIntro + '\'' +
                 '}';
     }
 
@@ -100,10 +100,10 @@ public class BookBean {
     }
 
     public String getAuthorIntro() {
-        return authorIntro;
+        return bookAuthorIntro;
     }
 
     public void setAuthorIntro(String authorIntro) {
-        this.authorIntro = authorIntro;
+        this.bookAuthorIntro = authorIntro;
     }
 }

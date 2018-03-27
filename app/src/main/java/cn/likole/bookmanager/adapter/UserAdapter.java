@@ -81,11 +81,6 @@ public class UserAdapter extends BaseSwipeAdapter {
 
             @Override
             public void onClick(View v) {
-                int pos = (Integer) delete.getTag();
-                UserBean obj = mDatas.get(pos);
-
-                Log.e("onClick", "........pos ...." + pos + " obj = " + obj);
-                mDatas.remove(obj);
 
                 //发送请求
                 OkHttpClient client = new OkHttpClient();
@@ -106,6 +101,13 @@ public class UserAdapter extends BaseSwipeAdapter {
 
                     }
                 });
+
+                //删除元素
+                int pos = (Integer) delete.getTag();
+                UserBean obj = mDatas.get(pos);
+
+                Log.e("onClick", "........pos ...." + pos + " obj = " + obj);
+                mDatas.remove(obj);
 
                 //通知更改
                 notifyDataSetChanged();

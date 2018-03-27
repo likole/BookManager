@@ -14,7 +14,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
-import java.util.List;
 
 import cn.likole.bookmanager.R;
 import cn.likole.bookmanager.adapter.BookInfoPageAdapter;
@@ -81,7 +80,7 @@ public class BookDetailActivity extends BaseActivity {
     @Override
     protected void init() {
 //        mUrl = getIntent().getStringExtra("bookId");
-        mUrl = basic_url + "book/entireList?offset=0&num=10";
+        mUrl = basic_url + "book/getBook?bookId=" + (getIntent().getIntExtra("bookId", 0));
     }
 
     @Override
@@ -99,9 +98,9 @@ public class BookDetailActivity extends BaseActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                List<BookBean> result = new Gson().fromJson(response.body().string(), new TypeToken<List<BookBean>>() {
+                BookBean result = new Gson().fromJson(response.body().string(), new TypeToken<BookBean>() {
                 }.getType());
-                mBookBean = result.get(0);
+                mBookBean = result;
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
