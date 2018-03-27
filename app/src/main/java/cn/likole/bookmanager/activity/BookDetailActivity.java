@@ -81,7 +81,7 @@ public class BookDetailActivity extends BaseActivity {
     @Override
     protected void init() {
 //        mUrl = getIntent().getStringExtra("bookId");
-        mUrl = basic_url + "book/entireList";
+        mUrl = basic_url + "book/entireList?offset=0&num=10";
     }
 
     @Override
@@ -89,7 +89,7 @@ public class BookDetailActivity extends BaseActivity {
 
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url(basic_url + "book/entireList")
+                .url(mUrl)
                 .build();
         client.newCall(request).enqueue(new Callback() {
             @Override

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.likole.bookmanager.bean.BookBean;
+import cn.likole.bookmanager.fragment.BookEditFragment;
 import cn.likole.bookmanager.fragment.StringFragment;
 import cn.likole.bookmanager.util.ViewUtils;
 
@@ -37,6 +38,22 @@ public class BookInfoPageAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
+        if (getPageTitle(position).equals("修改")) {
+            Fragment fragment = ViewUtils.createFragment(BookEditFragment.class, false);
+            Bundle bundle = new Bundle();
+            //int bookId<br />String bookIsbn<br />int bookNumber<br /> int bookBorrow<br />String bookImage<br /> String bookTitle<br />String bookIntro<br />String bookAuthor<br />String authorIntro
+            bundle.putInt("bookId", mBookBean.getBookId());
+            bundle.putString("bookIsbn", mBookBean.getBookIsbn());
+            bundle.putInt("bookNumber", mBookBean.getBookNumber());
+            bundle.putInt("bookBorrow", mBookBean.getBookBorrow());
+            bundle.putString("bookTitle", mBookBean.getBookTitle());
+            bundle.putString("bookIntro", mBookBean.getBookIntro());
+            bundle.putString("bookAuthor", mBookBean.getBookAuthor());
+            bundle.putString("authorIntro", mBookBean.getAuthorIntro());
+            fragment.setArguments(bundle);
+            return fragment;
+        }
+
         Fragment fragment = ViewUtils.createFragment(StringFragment.class, false);
         Bundle bundle = new Bundle();
         if (getPageTitle(position).equals("作者信息")) {
