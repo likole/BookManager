@@ -1,43 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
 
-    <EditText
-        android:id="@+id/user_add_username"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="账号"
-        android:maxLines="1" />
+        android:layout_height="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-    <EditText
-        android:id="@+id/user_add_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="姓名"
-        android:maxLines="1" />
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar2"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:title="添加用户"
+            app:layout_collapseMode="pin"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:titleTextColor="#ffffff" />
+    </android.support.design.widget.AppBarLayout>
 
-    <EditText
-        android:id="@+id/user_add_password"
+    <LinearLayout
+        android:layout_margin="26dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="密码"
-        android:maxLines="1" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <CheckBox
-        android:id="@+id/user_add_admin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="管理员" />
+        <EditText
+            android:id="@+id/user_add_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="账号"
+            android:maxLines="1" />
 
-    <Button
-        android:id="@+id/button"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Button" />
+        <EditText
+            android:id="@+id/user_add_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="姓名"
+            android:maxLines="1" />
+
+        <EditText
+            android:id="@+id/user_add_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="密码"
+            android:maxLines="1" />
+
+        <CheckBox
+            android:id="@+id/user_add_admin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="管理员" />
+
+        <Button
+            android:id="@+id/btn_user_add"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="添加" />
+
+    </LinearLayout>
 
 
 </LinearLayout>

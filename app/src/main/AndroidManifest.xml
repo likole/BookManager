@@ -38,6 +38,9 @@
         <activity
             android:name=".activity.BookDetailActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.UserAddActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
