@@ -2,12 +2,15 @@ package cn.likole.bookmanager.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import java.util.List;
 
 import cn.likole.bookmanager.R;
 import cn.likole.bookmanager.activity.BookDetailActivity;
 import cn.likole.bookmanager.bean.BookBean;
+
+import static cn.likole.bookmanager.Constant.basic_url;
 
 /**
  * Created by _SOLID
@@ -39,6 +42,12 @@ public class BookAdapter extends RVBaseAdapter<BookBean> {
         holder.setText(R.id.tv_author, "作者:" + bean.getBookAuthor() + "");
         holder.setText(R.id.tv_isbn, "ISBN:" + bean.getBookIsbn());
         holder.setText(R.id.tv_bookid, "图书编号:" + bean.getBookId());
-//        holder.setImageFromInternet(R.id.iv_image, bean.getImage());
+        try {
+            Log.e("image", bean.getBookImage());
+            holder.setImageFromInternet(R.id.iv_image, basic_url + "images/" + bean.getBookImage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

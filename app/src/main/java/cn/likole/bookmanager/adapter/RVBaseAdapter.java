@@ -183,7 +183,7 @@ public abstract class RVBaseAdapter<T> extends RecyclerView.Adapter<RVBaseAdapte
         public void setImageFromInternet(int viewId, String url) {
             ImageView iv = getView(viewId);
             ImageRequest imageRequest = new ImageRequest.Builder().imgView(iv).url(url).create();
-            ImageLoader.getProvider().loadImage(imageRequest);
+            ImageLoader.getProvider().loadImage(mContext, imageRequest);
         }
     }
 

@@ -23,6 +23,8 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import ren.solid.library.http.ImageLoader;
+import ren.solid.library.http.request.ImageRequest;
 
 import static cn.likole.bookmanager.Constant.basic_url;
 
@@ -109,8 +111,13 @@ public class BookDetailActivity extends BaseActivity {
                         mTvMsg.setText(mBookBean.getBookAuthor() + "/" + mBookBean.getBookIsbn() + "/" + mBookBean.getBookId());
                         mTvRating.setText("总数：" + mBookBean.getBookNumber() + " 剩余：" + (mBookBean.getBookNumber() - mBookBean.getBookBorrow()));
 
-//                ImageRequest imageRequest = new ImageRequest.Builder().imgView(mIvBook).url(result.getImages().getLarge()).create();
-//                ImageLoader.getProvider().loadImage(imageRequest);
+                        try {
+                            ImageRequest imageRequest = new ImageRequest.Builder().imgView(mIvBook).url(basic_url + "images/" + mBookBean.getBookImage()).create();
+                            ImageLoader.getProvider().loadImage(imageRequest);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
 
                         BookInfoPageAdapter adapter = new BookInfoPageAdapter(BookDetailActivity.this, mBookBean, getSupportFragmentManager());
                         mViewPager.setAdapter(adapter);
