@@ -75,6 +75,8 @@ public class BorrowAdapter extends BaseSwipeAdapter {
             if (borrow.getBorrowInfo().getBorrowState() == 1) {
                 tv.setTextColor(mContext.getResources().getColor(R.color.md_grey_500));
                 tv.setText(tv.getText() + "(已还)");
+            } else {
+                tv.setTextColor(mContext.getResources().getColor(R.color.md_amber_900));
             }
             TextView tv2 = (TextView) convertView.findViewById(R.id.tv_bookid);
             tv2.setText("ISBN:" + borrow.getBook().getBookIsbn());
