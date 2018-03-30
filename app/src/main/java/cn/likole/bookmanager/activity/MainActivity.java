@@ -17,6 +17,7 @@ import android.view.MenuItem;
 
 import cn.likole.bookmanager.R;
 import cn.likole.bookmanager.fragment.AboutFragment;
+import cn.likole.bookmanager.fragment.BookAddFragment;
 import cn.likole.bookmanager.fragment.BookFragment;
 import cn.likole.bookmanager.fragment.UserFragment;
 import cn.likole.bookmanager.util.SnackBarUtils;
@@ -130,6 +131,10 @@ public class MainActivity extends BaseActivity {
 //                        mToolbar.setTitle("主题换肤");
 //                        switchFragment(ChangeSkinFragment.class);
 //                        break;
+                    case R.id.navigation_item_addbook:
+                        mToolbar.setTitle("添加图书");
+                        switchFragment(BookAddFragment.class);
+                        break;
                     case R.id.navigation_item_about:
                         mToolbar.setTitle("关于");
                         switchFragment(AboutFragment.class);

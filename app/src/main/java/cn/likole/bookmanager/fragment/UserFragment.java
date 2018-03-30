@@ -7,6 +7,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -36,6 +37,8 @@ import static cn.likole.bookmanager.Constant.basic_url;
 
 public class UserFragment extends BaseFragment {
 
+
+    private boolean isGetData = false;
     private ListView mListView;
     private Button btn;
     ArrayList<UserBean> list;
@@ -166,6 +169,34 @@ public class UserFragment extends BaseFragment {
 
             }
         });
+    }
+
+    //数据更新问题
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        //   进入当前Fragment
+        if (enter && !isGetData) {
+            isGetData = true;
+            update();
+        } else {
+            isGetData = false;
+        }
+        return super.onCreateAnimation(transit, enter, nextAnim);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!isGetData) {
+            update();
+            isGetData = true;
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        isGetData = false;
     }
 
 }

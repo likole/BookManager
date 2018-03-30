@@ -51,11 +51,19 @@ public class UserAddActivity extends BaseActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                String username = et_username.getText().toString();
+                String password = et_password.getText().toString();
+                if (username.length() <= 0 || password.length() < 6) {
+                    Toast.makeText(UserAddActivity.this, "用户名或密码过短", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 //tring username<br />String password<br />String name<br />int power
                 OkHttpClient client = new OkHttpClient();
                 FormBody.Builder formBody = new FormBody.Builder();
-                formBody.add("username", et_username.getText().toString());
-                formBody.add("password", et_password.getText().toString());
+                formBody.add("username", username);
+                formBody.add("password", password);
                 formBody.add("name", et_name.getText().toString());
                 formBody.add("power", String.valueOf(admin));
                 Request request = new Request.Builder()

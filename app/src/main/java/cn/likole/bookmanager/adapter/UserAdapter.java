@@ -70,7 +70,7 @@ public class UserAdapter extends BaseSwipeAdapter {
         //tv.setText((position + 1) + ".");
         tv.setText("账号：" + mDatas.get(position).getUserUsername() + "(用户编号：" + mDatas.get(position).getUserId() + ")");
         TextView tv2 = (TextView) convertView.findViewById(R.id.user_name);
-        tv2.setText("用户名：" + mDatas.get(position).getUserName());
+        tv2.setText("用户名：" + mDatas.get(position).getUserName() + (mDatas.get(position).getUserPower() == 1 ? "(管理员)" : ""));
         TextView tv3 = (TextView) convertView.findViewById(R.id.user_password);
         tv3.setText("密码：" + mDatas.get(position).getUserPassword());
 

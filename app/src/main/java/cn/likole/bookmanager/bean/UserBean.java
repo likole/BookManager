@@ -9,15 +9,25 @@ public class UserBean {
     private String userUserName;
     private String userPassword;
     private String userName;
+    private int userPower;
 
     @Override
     public String toString() {
         return "UserBean{" +
                 "userId=" + userId +
-                ", userUsername='" + userUserName + '\'' +
+                ", userUserName='" + userUserName + '\'' +
                 ", userPassword='" + userPassword + '\'' +
                 ", userName='" + userName + '\'' +
+                ", userPower=" + userPower +
                 '}';
+    }
+
+    public int getUserPower() {
+        return userPower;
+    }
+
+    public void setUserPower(int userPower) {
+        this.userPower = userPower;
     }
 
     public int getUserId() {
