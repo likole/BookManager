@@ -12,6 +12,7 @@ import com.daimajia.swipe.SimpleSwipeListener;
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.BaseSwipeAdapter;
 
+import java.io.IOException;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,6 +20,14 @@ import java.util.List;
 
 import cn.likole.bookmanager.R;
 import cn.likole.bookmanager.bean.BorrowBean;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+import static cn.likole.bookmanager.Constant.basic_url;
 
 /**
  * Created by likole on 3/30/18.
@@ -87,6 +96,28 @@ public class BorrowAdapter extends BaseSwipeAdapter {
                 int pos = (Integer) delete.getTag();
                 BorrowBean obj = mDatas.get(pos);
 
+                //发送请求
+                OkHttpClient client = new OkHttpClient();
+                FormBody.Builder formBody = new FormBody.Builder();
+                formBody.add("borrowId", mDatas.get(pos).getBorrowInfo().getBorrowId() + "");
+                Request request = new Request.Builder()
+                        .url(basic_url + "borrow/update")
+                        .post(formBody.build())
+                        .build();
+                client.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+
+                    }
+                });
+
+
+                //移除
                 Log.e("onClick", "........pos ...." + pos + " obj = " + obj);
                 mDatas.remove(obj);
                 notifyDataSetChanged();

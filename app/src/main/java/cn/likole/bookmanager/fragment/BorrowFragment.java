@@ -2,7 +2,9 @@ package cn.likole.bookmanager.fragment;
 
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
 import android.view.animation.Animation;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
@@ -33,6 +35,8 @@ public class BorrowFragment extends BaseFragment {
     private ListView mListView;
     private BorrowAdapter mAdapter;
     private List<BorrowBean> mDatas;
+    private boolean showHistory = false;
+    private Button btn_history;
     private boolean isGetData = false;
     Handler handler = new Handler() {
         public void handleMessage(android.os.Message msg) {
@@ -54,11 +58,28 @@ public class BorrowFragment extends BaseFragment {
 
     @Override
     protected void setUpView() {
+        //列表
         mListView = $(R.id.borrow_list);
         mDatas = new ArrayList<>();
         mAdapter = new BorrowAdapter(getActivity(), mDatas);
 //        mAdapter.setMode(Attributes.Mode.Single);
         mListView.setAdapter(mAdapter);
+
+        //历史记录
+        btn_history = $(R.id.btn_show_state);
+        btn_history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (showHistory) {
+                    showHistory = false;
+                    btn_history.setText("显示历史记录");
+                } else {
+                    showHistory = true;
+                    btn_history.setText("隐藏历史记录");
+                }
+                update();
+            }
+        });
     }
 
 
@@ -81,8 +102,19 @@ public class BorrowFragment extends BaseFragment {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 try {
-                    mDatas = new Gson().fromJson(response.body().string(), new TypeToken<List<BorrowBean>>() {
+                    List<BorrowBean> tmp;
+                    tmp = new Gson().fromJson(response.body().string(), new TypeToken<List<BorrowBean>>() {
                     }.getType());
+
+                    if (showHistory) {
+                        mDatas = tmp;
+                    } else {
+                        mDatas.clear();
+                        for (BorrowBean b : tmp) {
+                            if (b.getBorrowInfo().getBorrowState() == 0) mDatas.add(b);
+                        }
+                    }
+
 //                    Log.e("info",mDatas.toString());
                     Message msg = new Message();
                     msg.what = 0;
