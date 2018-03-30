@@ -63,7 +63,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="解析失败"
-                    android:textColor="#292929"
+                    android:textColor="@color/md_amber_900"
                     android:textSize="18sp" />
 
                 <TextView

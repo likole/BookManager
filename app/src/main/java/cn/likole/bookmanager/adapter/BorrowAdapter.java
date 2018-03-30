@@ -72,6 +72,10 @@ public class BorrowAdapter extends BaseSwipeAdapter {
         try {
             TextView tv = (TextView) convertView.findViewById(R.id.tv_title);
             tv.setText(borrow.getBook().getBookTitle() + "(id:" + borrow.getBook().getBookId() + ")");
+            if (borrow.getBorrowInfo().getBorrowState() == 1) {
+                tv.setTextColor(mContext.getResources().getColor(R.color.md_grey_500));
+                tv.setText(tv.getText() + "(已还)");
+            }
             TextView tv2 = (TextView) convertView.findViewById(R.id.tv_bookid);
             tv2.setText("ISBN:" + borrow.getBook().getBookIsbn());
             TextView tv3 = (TextView) convertView.findViewById(R.id.tv_username);
@@ -92,7 +96,6 @@ public class BorrowAdapter extends BaseSwipeAdapter {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 int pos = (Integer) delete.getTag();
                 BorrowBean obj = mDatas.get(pos);
 

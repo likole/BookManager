@@ -1,5 +1,6 @@
 package cn.likole.bookmanager.fragment;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.likole.bookmanager.R;
+import cn.likole.bookmanager.activity.BorrowActivity;
 import cn.likole.bookmanager.adapter.BorrowAdapter;
 import cn.likole.bookmanager.bean.BorrowBean;
 import cn.likole.bookmanager.util.SnackBarUtils;
@@ -34,6 +36,7 @@ public class BorrowFragment extends BaseFragment {
 
     private ListView mListView;
     private BorrowAdapter mAdapter;
+    private Button btn_borrow;
     private List<BorrowBean> mDatas;
     private boolean showHistory = false;
     private Button btn_history;
@@ -78,6 +81,15 @@ public class BorrowFragment extends BaseFragment {
                     btn_history.setText("隐藏历史记录");
                 }
                 update();
+            }
+        });
+
+        //借阅
+        btn_borrow = $(R.id.btn_borrow);
+        btn_borrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), BorrowActivity.class));
             }
         });
     }

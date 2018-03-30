@@ -36,10 +36,17 @@
             android:layout_height="wrap_content"
             android:hint="账号"
             android:maxLines="1" />
+        <!--int borrowUserId<br />int borrowBookId-->
+        <EditText
+            android:id="@+id/borrow_bookId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="账号"
+            android:maxLines="1" />
 
 
         <Button
-            android:id="@+id/btn_user_add"
+            android:id="@+id/btn_borrow"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

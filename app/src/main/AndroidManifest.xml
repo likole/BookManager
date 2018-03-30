@@ -41,6 +41,9 @@
         <activity
             android:name=".activity.UserAddActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.BorrowActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
