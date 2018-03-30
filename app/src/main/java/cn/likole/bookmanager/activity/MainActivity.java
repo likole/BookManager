@@ -19,6 +19,7 @@ import cn.likole.bookmanager.R;
 import cn.likole.bookmanager.fragment.AboutFragment;
 import cn.likole.bookmanager.fragment.BookAddFragment;
 import cn.likole.bookmanager.fragment.BookFragment;
+import cn.likole.bookmanager.fragment.BorrowFragment;
 import cn.likole.bookmanager.fragment.UserFragment;
 import cn.likole.bookmanager.util.SnackBarUtils;
 import cn.likole.bookmanager.util.ViewUtils;
@@ -131,6 +132,10 @@ public class MainActivity extends BaseActivity {
 //                        mToolbar.setTitle("主题换肤");
 //                        switchFragment(ChangeSkinFragment.class);
 //                        break;
+                    case R.id.navigation_item_borrow:
+                        mToolbar.setTitle("借阅管理");
+                        switchFragment(BorrowFragment.class);
+                        break;
                     case R.id.navigation_item_addbook:
                         mToolbar.setTitle("添加图书");
                         switchFragment(BookAddFragment.class);
