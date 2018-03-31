@@ -104,7 +104,7 @@ public class BookFragment extends BaseFragment implements View.OnClickListener {
 //        String reqUrl = "https://api.douban.com/v2/book/search" + "?q=" + mCurrentKeyWord + "&start=" + (mCurrentPageIndex - 1) * mPageSize +
 //                "&count=" + mPageSize;
 
-        HttpClientManager.getData(basic_url + "book/entireList?offset=" + (mCurrentPageIndex - 1) * mPageSize + "&num=" + mPageSize, new JsonHttpCallBack<List<BookBean>>() {
+        HttpClientManager.getData(basic_url + "book/entireList?q=" + mCurrentKeyWord + "&offset=" + (mCurrentPageIndex - 1) * mPageSize + "&num=" + mPageSize, new JsonHttpCallBack<List<BookBean>>() {
             @Override
             public Type getType() {
                 return new TypeToken<List<BookBean>>() {
