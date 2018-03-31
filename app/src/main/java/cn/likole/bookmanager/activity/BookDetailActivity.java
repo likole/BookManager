@@ -1,6 +1,7 @@
 package cn.likole.bookmanager.activity;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
@@ -122,6 +123,17 @@ public class BookDetailActivity extends BaseActivity {
                         BookInfoPageAdapter adapter = new BookInfoPageAdapter(BookDetailActivity.this, mBookBean, getSupportFragmentManager());
                         mViewPager.setAdapter(adapter);
                         mTabLayout.setupWithViewPager(mViewPager);
+
+                        //mIvBook
+                        mIvBook.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent intent = new Intent(BookDetailActivity.this, UploadActivity.class);
+                                intent.putExtra("bookId", mBookBean.getBookId());
+                                startActivity(intent);
+
+                            }
+                        });
                     }
                 });
             }

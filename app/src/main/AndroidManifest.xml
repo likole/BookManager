@@ -42,7 +42,7 @@
             android:name=".activity.UserAddActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.BorrowActivity"
+            android:name=".activity.UploadActivity"
             android:screenOrientation="portrait" />
     </application>
 

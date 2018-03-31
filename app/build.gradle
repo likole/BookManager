@@ -40,6 +40,7 @@ dependencies {
     compile 'com.github.chrisbanes:PhotoView:1.2.6'
     compile 'com.jcodecraeer:xrecyclerview:1.2.7'
     compile 'com.google.code.gson:gson:2.2.4'
+    compile 'com.jph.takephoto:takephoto_library:4.0.3'
     compile 'com.android.support:recyclerview-v7:26.+'
     compile 'com.zhy:okhttputils:2.4.1'
     compile "com.daimajia.swipelayout:library:1.2.0@aar"

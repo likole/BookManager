@@ -41,6 +41,7 @@ public class BookAddFragment extends BaseFragment {
                     break;
                 case 1:
                     Toast.makeText(getActivity(), "添加成功", Toast.LENGTH_LONG).show();
+                    resetView();
                     break;
                 default:
                     break;
@@ -51,6 +52,16 @@ public class BookAddFragment extends BaseFragment {
     @Override
     protected int setLayoutResourceID() {
         return R.layout.fragment_book_edit;
+    }
+
+
+    private void resetView() {
+        et_book_isbn.setText("");
+        et_book_number.setText("");
+        et_book_title.setText("");
+        et_book_intro.setText("");
+        et_book_auther.setText("");
+        et_book_autherInfo.setText("");
     }
 
     @Override
