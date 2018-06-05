@@ -25,6 +25,11 @@ public class HttpClientManager {
         HttpHelper.getProvider().loadString(request, callBack);
     }
 
+    public static void postData(String url, HttpCallBack callBack) {
+        HttpRequest request = new HttpRequest.Builder().method(HttpRequest.Method.POST).url(url).create();
+        HttpHelper.getProvider().loadString(request, callBack);
+    }
+
     public static void getData(String url, Map<String, String> params, HttpCallBack callBack) {
         HttpRequest request = new HttpRequest.Builder().method(HttpRequest.Method.GET).url(url).params(params).create();
         HttpHelper.getProvider().loadString(request, callBack);

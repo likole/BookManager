@@ -44,7 +44,7 @@ public class BookAdapter extends RVBaseAdapter<BookBean> {
         holder.setText(R.id.tv_bookid, "图书编号:" + bean.getBookId());
         try {
             Log.e("image", bean.getBookImage());
-            holder.setImageFromInternet(R.id.iv_image, basic_url + "images/" + bean.getBookImage());
+            holder.setImageFromInternet(R.id.iv_image, basic_url + "images/" + bean.getBookImage().substring(19));
         } catch (Exception e) {
             e.printStackTrace();
         }

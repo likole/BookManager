@@ -112,11 +112,15 @@ public class BookDetailActivity extends BaseActivity {
                         mTvMsg.setText(mBookBean.getBookAuthor() + "/" + mBookBean.getBookIsbn() + "/" + mBookBean.getBookId());
                         mTvRating.setText("总数：" + mBookBean.getBookNumber() + " 剩余：" + (mBookBean.getBookNumber() - mBookBean.getBookBorrow()));
 
-                        try {
-                            ImageRequest imageRequest = new ImageRequest.Builder().imgView(mIvBook).url(basic_url + "images/" + mBookBean.getBookImage()).create();
-                            ImageLoader.getProvider().loadImage(imageRequest);
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                        if (mBookBean.getBookImage() == null) {
+                            mIvBook.setImageDrawable(getResources().getDrawable(R.drawable.book));
+                        } else {
+                            try {
+                                ImageRequest imageRequest = new ImageRequest.Builder().imgView(mIvBook).url(basic_url + "images/" + mBookBean.getBookImage().substring(19)).create();
+                                ImageLoader.getProvider().loadImage(imageRequest);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
 
 

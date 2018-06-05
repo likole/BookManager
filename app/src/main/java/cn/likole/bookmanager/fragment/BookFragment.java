@@ -17,7 +17,6 @@ import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import cn.likole.bookmanager.R;
 import cn.likole.bookmanager.adapter.BookAdapter;
@@ -91,10 +90,10 @@ public class BookFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     protected void setUpData() {
-        String[] keyWords = {"Android", "文艺青年", "科技", ".NET", "创业之路"};
-        Random random = new Random();
-        int n = random.nextInt(keyWords.length);
-        mCurrentKeyWord = keyWords[n];
+//        String[] keyWords = {"Android", "文艺青年", "科技", ".NET", "创业之路"};
+//        Random random = new Random();
+//        int n = random.nextInt(keyWords.length);
+        mCurrentKeyWord = "";
         //switchAction(ACTION_REFRESH);
         mRecyclerView.setRefreshing(true);
 
@@ -104,6 +103,7 @@ public class BookFragment extends BaseFragment implements View.OnClickListener {
 //        String reqUrl = "https://api.douban.com/v2/book/search" + "?q=" + mCurrentKeyWord + "&start=" + (mCurrentPageIndex - 1) * mPageSize +
 //                "&count=" + mPageSize;
 
+        if (mCurrentKeyWord.length() == 0)
         HttpClientManager.getData(basic_url + "book/entireList?q=" + mCurrentKeyWord + "&offset=" + (mCurrentPageIndex - 1) * mPageSize + "&num=" + mPageSize, new JsonHttpCallBack<List<BookBean>>() {
             @Override
             public Type getType() {
@@ -118,7 +118,7 @@ public class BookFragment extends BaseFragment implements View.OnClickListener {
             }
 
             @Override
-            public DataType getDataType() {
+            public JsonHttpCallBack.DataType getDataType() {
                 return DataType.OBJECT;
             }
 
@@ -129,7 +129,33 @@ public class BookFragment extends BaseFragment implements View.OnClickListener {
                 loadComplete();
             }
         });
+        else {
+            HttpClientManager.postData(basic_url + "book/partList?bookTitle=" + mCurrentKeyWord + "&offset=" + (mCurrentPageIndex - 1) * mPageSize + "&num=" + mPageSize, new JsonHttpCallBack<List<BookBean>>() {
+                @Override
+                public Type getType() {
+                    return new TypeToken<List<BookBean>>() {
+                    }.getType();
+                }
 
+                @Override
+                public void onSuccess(List<BookBean> result) {
+                    mBookAdapter.addAll(result);
+                    loadComplete();
+                }
+
+                @Override
+                public JsonHttpCallBack.DataType getDataType() {
+                    return DataType.OBJECT;
+                }
+
+                @Override
+                public void onError(Exception e) {
+                    Log.e(TAG, "onError:" + e);
+                    SnackBarUtils.makeLong(mRecyclerView, "网络错误").danger();
+                    loadComplete();
+                }
+            });
+        }
     }
 
     private void loadComplete() {
